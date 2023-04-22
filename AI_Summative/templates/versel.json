@@ -1,0 +1,12 @@
+{
+    "builds":[
+        {
+            "src":".AI_Summative/app.py",
+            "use":"@vercel/python"
+        },
+        {
+            "routes":"/(.*)",
+            "dest":".AI_Summative/app.py"
+        }
+    ]
+}

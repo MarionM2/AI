@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+ <div class="login">
+	<h1>Malware Prediction</h1>
+    {% if error %}
+        <div class="error-msg">{{ error }}</div>
+    {% endif %}
+
+    <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	<input type="text" name="EngineVersion" placeholder="EngineVersion" required="required" />
+        <input type="text" name="AvSigVersion" placeholder="AvSigVersion" required="required" />
+		<input type="text" name="Processor" placeholder="Processor" required="required" />
+		<input type="text" name="Census_PowerPlatformRoleName" placeholder="Census_PowerPlatformRoleName" required="required" />
+		<input type="text" name="Census_OSVersion" placeholder="Census_OSVersion" required="required" />
+		<input type="text" name="Census_OSArchitecture" placeholder="Census_OSArchitecture" required="required" />
+		<input type="number" name="RtpStateBitfield" placeholder="RtpStateBitfield" required="required" />
+		<input type="number" name="AVProductStatesIdentifier" placeholder="AVProductStatesIdentifier" required="required" />
+		<input type="number" name="AVProductsInstalled" placeholder="AVProductsInstalled" required="required" />
+		<input type="number" name="Census_ProcessorCoreCount" placeholder="Census_ProcessorCoreCount" required="required" />
+		<input type="number" name="Census_PrimaryDiskTotalCapacity" placeholder="Census_PrimaryDiskTotalCapacity" required="required" />
+		<input type="number" name="Census_TotalPhysicalRAM" placeholder="Census_TotalPhysicalRAM" required="required" />
+		<input type="number" name="Census_InternalPrimaryDiagonalDisplaySizeInInches" placeholder="Census_InternalPrimaryDiagonalDisplaySizeInInches" required="required" />
+
+    <!-- Multiple choice fields for True/False values -->
+    <h3>Select either True or False:</h3>
+    <div class="radio-container">
+        <label for="IsSxsPassiveMode">IsSxsPassiveMode:</label>
+        <div>
+            <input type="radio" name="IsSxsPassiveMode" value="True" required="required"> True
+            <input type="radio" name="IsSxsPassiveMode" value="False" required="required"> False
+        </div>
+    </div>
+    <div class="radio-container">
+      <label for="IsProtected">IsProtected:</label>
+      <div>
+          <input type="radio" name="IsProtected" value="True" required="required"> True
+          <input type="radio" name="IsProtected" value="False" required="required"> False
+      </div>
+    </div>
+    <div class="radio-container">
+      <label for="SMode">SMode:</label>
+      <div>
+          <input type="radio" name="SMode" value="True" required="required"> True
+          <input type="radio" name="SMode" value="False" required="required"> False
+      </div>
+    </div>
+    <div class="radio-container">
+      <label for="Census_IsVirtualDevice">Census_IsVirtualDevice:</label>
+      <div>
+          <input type="radio" name="Census_IsVirtualDevice" value="True" required="required"> True
+          <input type="radio" name="Census_IsVirtualDevice" value="False" required="required"> False
+      </div>
+    </div>
+    <div class="radio-container">
+      <label for="Census_IsTouchEnabled">Census_IsTouchEnabled:</label>
+      <div>
+          <input type="radio" name="Census_IsTouchEnabled" value="True" required="required"> True
+          <input type="radio" name="Census_IsTouchEnabled" value="False" required="required"> False
+      </div>
+    </div>
+    <div class="radio-container">
+      <label for="Census_IsAlwaysOnAlwaysConnectedCapable">Census_IsAlwaysOnAlwaysConnectedCapable:</label>
+      <div>
+          <input type="radio" name="Census_IsAlwaysOnAlwaysConnectedCapable" value="True" required="required"> True
+          <input type="radio" name="Census_IsAlwaysOnAlwaysConnectedCapable" value="False" required="required"> False
+      </div>
+    </div>
+    <div class="radio-container">
+      <label for="Wdft_IsGamer">Wdft_IsGamer:</label>
+      <div>
+          <input type="radio" name="Wdft_IsGamer" value="True" required="required"> True
+          <input type="radio" name="Wdft_IsGamer" value="False" required="required"> False
+      </div>
+    </div>
+        <button type="submit" class="btn">Predict</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+
+
+</body>
+</html>
